@@ -1,0 +1,27 @@
+syntax: glob
+.svn
+.metadata
+*.tmp
+target
+*/bin
+*/build
+*/classes
+*/tmp
+*/dist
+*/src/gen
+*/reports
+*.pyc
+.idea
+*/soapui*.log
+*/global-groovy.log
+.arcconfig
+**/*.iml
+.idea/**
+*.iml
+*.log
+*~
+**/.classpath
+**/.project
+**/.settings
+.local
+.Thumbs.db
