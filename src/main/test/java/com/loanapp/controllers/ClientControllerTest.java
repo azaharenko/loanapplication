@@ -27,9 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringApplicationConfiguration(classes = Application.class)
 public class ClientControllerTest {
 
-    public static final String ID = "1111";
-    public static final String FIRST_NAME = "John";
-    public static final String LAST_NAME = "Boskin";
+    public static final String TEST_ID = "1111";
 
     ClientController instance;
 
@@ -46,7 +44,7 @@ public class ClientControllerTest {
 
     @Test
     public void testFindClientById() throws Exception {
-      Client client = new Client(ID, FIRST_NAME, LAST_NAME);
+      Client client = new Client(TEST_ID, anyString(), anyString());
       when(instance.clientRepository.findById(client.getId())).thenReturn(client);
 
       mockMvc.perform(get("/client/{id}", client.getId()))
@@ -77,7 +75,7 @@ public class ClientControllerTest {
 
     @Test
     public void testBlacklistClient() throws Exception {
-      Client client = new Client(ID, FIRST_NAME, LAST_NAME);
+      Client client = new Client(TEST_ID, anyString(), anyString());
       when(instance.clientRepository.findById(client.getId())).thenReturn(client);
       mockMvc.perform(put("/customer/blacklist/add/{id}", client.getId()))
           .andExpect(status().isOk());
@@ -97,7 +95,7 @@ public class ClientControllerTest {
 
     @Test
     public void testBlacklistClient2() throws Exception {
-      Client client = new Client(ID, FIRST_NAME, LAST_NAME);
+      Client client = new Client(TEST_ID, anyString(), anyString());
       client.setBlacklisted(true);
       when(instance.clientRepository.findById(client.getId())).thenReturn(client);
 
@@ -112,7 +110,7 @@ public class ClientControllerTest {
 
     @Test
     public void testRemoveFromBlacklistClient() throws Exception {
-      Client client = new Client(ID, FIRST_NAME, LAST_NAME);
+      Client client = new Client(TEST_ID, anyString(), anyString());
       client.setBlacklisted(true);
       when(instance.clientRepository.findById(client.getId())).thenReturn(client);
 
@@ -135,7 +133,7 @@ public class ClientControllerTest {
 
     @Test
     public void testBlacklistClient3() throws Exception {
-      Client client = new Client(ID, FIRST_NAME, LAST_NAME);
+      Client client = new Client(TEST_ID, anyString(), anyString());
       client.setBlacklisted(false);
       when(instance.clientRepository.findById(client.getId())).thenReturn(client);
 
