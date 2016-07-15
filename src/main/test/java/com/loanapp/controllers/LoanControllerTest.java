@@ -29,7 +29,6 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -60,7 +59,7 @@ public class LoanControllerTest {
     instance.clientRepository = mock(ClientRepository.class);
     instance.loanRepository = mock(LoanRepository.class);
     instance.requestService = mock(RequestService.class);
-    mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).apply(springSecurity()).build();
+    mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     mockLoanApplication = mock(LoanApplication.class);
 
   }
