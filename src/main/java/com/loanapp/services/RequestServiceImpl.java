@@ -19,10 +19,10 @@ import java.util.concurrent.ConcurrentMap;
 public class RequestServiceImpl implements RequestService {
     protected final static Logger log = LogManager.getLogger(RequestServiceImpl.class);
 
-    @Value("${com.loanapp.number.session.second}")
+    @Value("${com.loanapp.number.session.second:2}")
     int numberOfSessionsPerSecond;
 
-    @Value("${com.loanapp.default.country}")
+    @Value("${com.loanapp.default.country:LV}")
     String defaultCountry;
 
 

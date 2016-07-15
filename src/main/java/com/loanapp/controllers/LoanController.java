@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RestController
-@PropertySource("file:${user.home}/.loanapplication/config.properties")
+@PropertySource(value={"file:${user.home}/.loanapplication/config.properties"}, ignoreResourceNotFound = true)
 public class LoanController {
     protected final static Logger log = LogManager.getLogger(LoanController.class);
 
@@ -39,7 +39,7 @@ public class LoanController {
     @Autowired
     ClientRepository clientRepository;
 
-    @Value("${com.loanapp.default.country}")
+    @Value("${com.loanapp.default.country:LV}")
     String defaultCountry;
 
     @RequestMapping(value = "/loan", method = RequestMethod.POST)

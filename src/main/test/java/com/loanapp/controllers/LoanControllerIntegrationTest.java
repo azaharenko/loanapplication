@@ -60,7 +60,7 @@ public class LoanControllerIntegrationTest {
   }
 
   @Test
-  public void createLoan_OK_NewUser() throws Exception {
+  public void createLoanNewUser() throws Exception {
     mockLoanApplication = new LoanApplication();
     mockLoanApplication.setClientId(TEST_CLIENT_ID);
     mockLoanApplication.setFirstName(TEST_FIRST_NAME);

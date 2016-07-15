@@ -43,7 +43,7 @@ public class LoanControllerTest {
   public static final String TEST_COUNTRY = "LV";
   public static final String TEST_CLIENT_ID = "TEST_CLIENT_ID";
   public static final Long TEST_LOAN_ID = 1l;
-  final ObjectMapper mapper = new ObjectMapper();
+
 
   @Autowired
   private WebApplicationContext webApplicationContext;
@@ -73,6 +73,7 @@ public class LoanControllerTest {
     when(instance.requestService.getCountry(anyString())).thenReturn(TEST_COUNTRY);
     when(instance.requestService.isSpamCompliant(TEST_COUNTRY)).thenReturn(true);
     when(instance.clientRepository.findById(TEST_CLIENT_ID)).thenReturn(null);
+    final ObjectMapper mapper = new ObjectMapper();
 
     mockMvc.perform(post("/loan")
         .content(mapper.writeValueAsString(mockLoanApplication))
@@ -93,6 +94,7 @@ public class LoanControllerTest {
     when(instance.requestService.getCountry(anyString())).thenReturn(TEST_COUNTRY);
     when(instance.requestService.isSpamCompliant(TEST_COUNTRY)).thenReturn(true);
     when(instance.clientRepository.findById(client.getId())).thenReturn(client);
+    final ObjectMapper mapper = new ObjectMapper();
 
     mockMvc.perform(post("/loan")
         .content(mapper.writeValueAsString(mockLoanApplication))
@@ -112,6 +114,7 @@ public class LoanControllerTest {
     when(instance.requestService.getCountry(anyString())).thenReturn(TEST_COUNTRY);
     when(instance.requestService.isSpamCompliant(TEST_COUNTRY)).thenReturn(true);
     when(instance.clientRepository.findById(client.getId())).thenReturn(client);
+    final ObjectMapper mapper = new ObjectMapper();
 
     mockMvc.perform(post("/loan")
         .content(mapper.writeValueAsString(mockLoanApplication))
@@ -129,6 +132,7 @@ public class LoanControllerTest {
     mockLoanApplication.setAmount(new BigDecimal(1.111));
     when(instance.requestService.getCountry(anyString())).thenReturn(TEST_COUNTRY);
     when(instance.requestService.isSpamCompliant(TEST_COUNTRY)).thenReturn(false);
+    final ObjectMapper mapper = new ObjectMapper();
 
     mockMvc.perform(post("/loan")
         .content(mapper.writeValueAsString(mockLoanApplication))
@@ -145,6 +149,7 @@ public class LoanControllerTest {
     mockLoanApplication.setAmount(new BigDecimal(1.01));
     when(instance.requestService.getCountry(anyString())).thenReturn(TEST_COUNTRY);
     when(instance.requestService.isSpamCompliant(TEST_COUNTRY)).thenReturn(false);
+    final ObjectMapper mapper = new ObjectMapper();
 
     mockMvc.perform(post("/loan")
         .content(mapper.writeValueAsString(mockLoanApplication))
@@ -160,6 +165,7 @@ public class LoanControllerTest {
     mockLoanApplication.setAmount(new BigDecimal(1.01));
     when(instance.requestService.getCountry(anyString())).thenReturn(TEST_COUNTRY);
     when(instance.requestService.isSpamCompliant(TEST_COUNTRY)).thenReturn(false);
+    final ObjectMapper mapper = new ObjectMapper();
 
     mockMvc.perform(post("/loan")
         .content(mapper.writeValueAsString(mockLoanApplication))
@@ -176,6 +182,7 @@ public class LoanControllerTest {
     mockLoanApplication.setAmount(new BigDecimal(1.01));
     when(instance.requestService.getCountry(anyString())).thenReturn(TEST_COUNTRY);
     when(instance.requestService.isSpamCompliant(TEST_COUNTRY)).thenReturn(false);
+    final ObjectMapper mapper = new ObjectMapper();
 
     mockMvc.perform(post("/loan")
         .content(mapper.writeValueAsString(mockLoanApplication))
@@ -192,6 +199,7 @@ public class LoanControllerTest {
     mockLoanApplication.setLastName(anyString());
     when(instance.requestService.getCountry(anyString())).thenReturn(TEST_COUNTRY);
     when(instance.requestService.isSpamCompliant(TEST_COUNTRY)).thenReturn(false);
+    final ObjectMapper mapper = new ObjectMapper();
 
     mockMvc.perform(post("/loan")
         .content(mapper.writeValueAsString(mockLoanApplication))
@@ -209,6 +217,7 @@ public class LoanControllerTest {
     mockLoanApplication.setAmount(new BigDecimal(1.111));
     when(instance.requestService.getCountry(anyString())).thenReturn(TEST_COUNTRY);
     when(instance.requestService.isSpamCompliant(TEST_COUNTRY)).thenReturn(false);
+    final ObjectMapper mapper = new ObjectMapper();
 
     mockMvc.perform(post("/loan")
         .content(mapper.writeValueAsString(mockLoanApplication))
@@ -226,6 +235,7 @@ public class LoanControllerTest {
     mockLoanApplication.setAmount(new BigDecimal(1001.00));
     when(instance.requestService.getCountry(anyString())).thenReturn(TEST_COUNTRY);
     when(instance.requestService.isSpamCompliant(TEST_COUNTRY)).thenReturn(false);
+    final ObjectMapper mapper = new ObjectMapper();
 
     mockMvc.perform(post("/loan")
         .content(mapper.writeValueAsString(mockLoanApplication))
@@ -243,6 +253,7 @@ public class LoanControllerTest {
     mockLoanApplication.setAmount(new BigDecimal(0.10));
     when(instance.requestService.getCountry(anyString())).thenReturn(TEST_COUNTRY);
     when(instance.requestService.isSpamCompliant(TEST_COUNTRY)).thenReturn(false);
+    final ObjectMapper mapper = new ObjectMapper();
 
     mockMvc.perform(post("/loan")
         .content(mapper.writeValueAsString(mockLoanApplication))
@@ -260,6 +271,7 @@ public class LoanControllerTest {
     mockLoanApplication.setAmount(new BigDecimal(-3.10));
     when(instance.requestService.getCountry(anyString())).thenReturn(TEST_COUNTRY);
     when(instance.requestService.isSpamCompliant(TEST_COUNTRY)).thenReturn(false);
+    final ObjectMapper mapper = new ObjectMapper();
 
     mockMvc.perform(post("/loan")
         .content(mapper.writeValueAsString(mockLoanApplication))

@@ -27,6 +27,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class ClientControllerTest {
 
     public static final String TEST_ID = "1111";
+    public static final String TEST_FIRST_NAME = "TEST_FIRST_NAME";
+    public static final String TEST_LAST_NAME = "TEST_LAST_NAME";
 
     ClientController instance;
 
@@ -43,18 +45,18 @@ public class ClientControllerTest {
 
     @Test
     public void testFindClientById() throws Exception {
-      Client client = new Client(TEST_ID, anyString(), anyString());
-      when(instance.clientRepository.findById(client.getId())).thenReturn(client);
+      Client client = new Client(TEST_ID, TEST_FIRST_NAME, TEST_LAST_NAME);
+      when(instance.clientRepository.findById(TEST_ID)).thenReturn(client);
 
-      mockMvc.perform(get("/client/{id}", client.getId()))
+      mockMvc.perform(get("/client/{id}", TEST_ID))
           .andExpect(status().isOk())
           .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-          .andExpect(jsonPath("$.id").value(client.getId()))
-          .andExpect(jsonPath("$.firstName").value(client.getFirstName()))
-          .andExpect(jsonPath("$.lastName").value(client.getLastName()));
+          .andExpect(jsonPath("$.id").value(TEST_ID))
+          .andExpect(jsonPath("$.firstName").value(anyString()))
+          .andExpect(jsonPath("$.lastName").value(anyString()));
 
 
-      verify(instance.clientRepository, times(1)).findById(client.getId());
+      verify(instance.clientRepository, times(1)).findById(TEST_ID);
       verifyNoMoreInteractions(instance.clientRepository);
     }
 
@@ -74,7 +76,7 @@ public class ClientControllerTest {
 
     @Test
     public void testBlacklistClient() throws Exception {
-      Client client = new Client(TEST_ID, anyString(), anyString());
+      Client client = new Client(TEST_ID, TEST_FIRST_NAME, TEST_LAST_NAME);
       when(instance.clientRepository.findById(client.getId())).thenReturn(client);
       mockMvc.perform(put("/customer/blacklist/add/{id}", client.getId()))
           .andExpect(status().isOk());
@@ -94,7 +96,7 @@ public class ClientControllerTest {
 
     @Test
     public void testBlacklistClient2() throws Exception {
-      Client client = new Client(TEST_ID, anyString(), anyString());
+      Client client = new Client(TEST_ID, TEST_FIRST_NAME, TEST_LAST_NAME);
       client.setBlacklisted(true);
       when(instance.clientRepository.findById(client.getId())).thenReturn(client);
 
@@ -109,7 +111,7 @@ public class ClientControllerTest {
 
     @Test
     public void testRemoveFromBlacklistClient() throws Exception {
-      Client client = new Client(TEST_ID, anyString(), anyString());
+      Client client = new Client(TEST_ID, TEST_FIRST_NAME, TEST_LAST_NAME);
       client.setBlacklisted(true);
       when(instance.clientRepository.findById(client.getId())).thenReturn(client);
 
@@ -132,7 +134,7 @@ public class ClientControllerTest {
 
     @Test
     public void testBlacklistClient3() throws Exception {
-      Client client = new Client(TEST_ID, anyString(), anyString());
+      Client client = new Client(TEST_ID, TEST_FIRST_NAME, TEST_LAST_NAME);
       client.setBlacklisted(false);
       when(instance.clientRepository.findById(client.getId())).thenReturn(client);
 
