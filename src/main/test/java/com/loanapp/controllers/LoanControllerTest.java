@@ -66,7 +66,7 @@ public class LoanControllerTest {
   }
 
   @Test
-  public void createLoanWithNewUser() throws Exception {
+  public void testCreateLoanWithNewUser() throws Exception {
     mockLoanApplication.setClientId(TEST_CLIENT_ID);
     mockLoanApplication.setFirstName(anyString());
     mockLoanApplication.setLastName(anyString());
@@ -85,7 +85,7 @@ public class LoanControllerTest {
   }
 
   @Test
-  public void createLoanWithExistingUser() throws Exception {
+  public void testCreateLoanWithExistingUser() throws Exception {
     Client client = new Client(TEST_CLIENT_ID, anyString(), anyString());
     mockLoanApplication.setClientId(client.getId());
     mockLoanApplication.setFirstName(anyString());
@@ -104,7 +104,7 @@ public class LoanControllerTest {
   }
 
   @Test
-  public void createLoanWithExistingUserIncorrectData() throws Exception {
+  public void testCreateLoanWithExistingUserIncorrectData() throws Exception {
     Client client = new Client(TEST_CLIENT_ID, anyString(), anyString());
     mockLoanApplication.setClientId(client.getId());
     mockLoanApplication.setFirstName(anyString());
@@ -123,7 +123,7 @@ public class LoanControllerTest {
   }
 
   @Test
-  public void createLoanSpamCheckFailed() throws Exception {
+  public void testCreateLoanSpamCheckFailed() throws Exception {
     mockLoanApplication.setClientId(anyString());
     mockLoanApplication.setFirstName(anyString());
     mockLoanApplication.setLastName(anyString());
@@ -140,7 +140,7 @@ public class LoanControllerTest {
   }
 
   @Test
-  public void createLoanNoClientId() throws Exception {
+  public void testCreateLoanNoClientId() throws Exception {
     mockLoanApplication.setFirstName(anyString());
     mockLoanApplication.setLastName(anyString());
     mockLoanApplication.setAmount(new BigDecimal(1.01));
@@ -155,7 +155,7 @@ public class LoanControllerTest {
   }
 
   @Test
-  public void createLoanNoFirstName() throws Exception {
+  public void testCreateLoanNoFirstName() throws Exception {
     mockLoanApplication.setClientId(anyString());
     mockLoanApplication.setLastName(anyString());
     mockLoanApplication.setAmount(new BigDecimal(1.01));
@@ -171,7 +171,7 @@ public class LoanControllerTest {
   }
 
   @Test
-  public void createLoanNoLastName() throws Exception {
+  public void testCreateLoanNoLastName() throws Exception {
     mockLoanApplication.setClientId(anyString());
     mockLoanApplication.setFirstName(anyString());
     mockLoanApplication.setAmount(new BigDecimal(1.01));
@@ -187,7 +187,7 @@ public class LoanControllerTest {
   }
 
   @Test
-  public void createLoanNoAmount() throws Exception {
+  public void testCreateLoanNoAmount() throws Exception {
     mockLoanApplication.setClientId(anyString());
     mockLoanApplication.setFirstName(anyString());
     mockLoanApplication.setLastName(anyString());
@@ -203,7 +203,7 @@ public class LoanControllerTest {
   }
 
   @Test
-  public void createLoanAmountWrongFormat() throws Exception {
+  public void testCreateLoanAmountWrongFormat() throws Exception {
     mockLoanApplication.setClientId(anyString());
     mockLoanApplication.setFirstName(anyString());
     mockLoanApplication.setLastName(anyString());
@@ -220,7 +220,7 @@ public class LoanControllerTest {
   }
 
   @Test
-  public void createLoanAmountBoundariesTooHigh() throws Exception {
+  public void testCreateLoanAmountBoundariesTooHigh() throws Exception {
     mockLoanApplication.setClientId(anyString());
     mockLoanApplication.setFirstName(anyString());
     mockLoanApplication.setLastName(anyString());
@@ -237,7 +237,7 @@ public class LoanControllerTest {
   }
 
   @Test
-  public void createLoanAmountBoundariesTooLow() throws Exception {
+  public void testCreateLoanAmountBoundariesTooLow() throws Exception {
     mockLoanApplication.setClientId(anyString());
     mockLoanApplication.setFirstName(anyString());
     mockLoanApplication.setLastName(anyString());
@@ -254,7 +254,7 @@ public class LoanControllerTest {
   }
 
   @Test
-  public void createLoanAmountNegative() throws Exception {
+  public void testCreateLoanAmountNegative() throws Exception {
     mockLoanApplication.setClientId(anyString());
     mockLoanApplication.setFirstName(anyString());
     mockLoanApplication.setLastName(anyString());
@@ -271,7 +271,7 @@ public class LoanControllerTest {
   }
 
   @Test
-  public void findLoanById() throws Exception {
+  public void testFindLoanById() throws Exception {
     Client client = new Client(TEST_CLIENT_ID, anyString(), anyString());
     Loan loan = new Loan(new BigDecimal(1.10), client);
     loan.setId(TEST_LOAN_ID);
@@ -294,7 +294,7 @@ public class LoanControllerTest {
   }
 
   @Test
-  public void findLoanByIdNotFound() throws Exception {
+  public void testFindLoanByIdNotFound() throws Exception {
     when(instance.loanRepository.findOne(TEST_LOAN_ID)).thenReturn(null);
 
 
@@ -309,7 +309,7 @@ public class LoanControllerTest {
   }
 
   @Test
-  public void findLoanByIdIncorrectId() throws Exception {
+  public void testFindLoanByIdIncorrectId() throws Exception {
     when(instance.loanRepository.findOne(TEST_LOAN_ID)).thenReturn(null);
 
     mockMvc.perform(get("/loan/{id}", anyString()))
@@ -323,7 +323,7 @@ public class LoanControllerTest {
   }
 
   @Test
-  public void findAllLoansNotFound() throws Exception {
+  public void testFindAllLoansNotFound() throws Exception {
     when(instance.loanRepository.findAll()).thenReturn(null);
 
     mockMvc.perform(get("/loans/all"))
@@ -338,7 +338,7 @@ public class LoanControllerTest {
   }
 
   @Test
-  public void findAllLoans() throws Exception {
+  public void testFindAllLoans() throws Exception {
     Client client = new Client(anyString(), anyString(), anyString());
     Loan loan = new Loan(new BigDecimal(1.10), client);
     Loan loan2 = new Loan(new BigDecimal(1.11), client);
@@ -359,7 +359,7 @@ public class LoanControllerTest {
   }
 
   @Test
-  public void findAllLoansForClientId() throws Exception {
+  public void testFindAllLoansForClientId() throws Exception {
     Client client = new Client(TEST_CLIENT_ID, anyString(), anyString());
     Loan loan = new Loan(new BigDecimal(1.10), client);
     List<Loan> loans = new ArrayList<Loan>() {{
@@ -381,7 +381,7 @@ public class LoanControllerTest {
   }
 
   @Test
-  public void findAllLoansForClientIdLoansNotFound() throws Exception {
+  public void testFindAllLoansForClientIdLoansNotFound() throws Exception {
     Client client = new Client(TEST_CLIENT_ID, anyString(), anyString());
     client.setLoans(null);
     when(instance.clientRepository.findById(TEST_CLIENT_ID)).thenReturn(client);
@@ -398,7 +398,7 @@ public class LoanControllerTest {
   }
 
   @Test
-  public void findAllLoansForClientIdClientNotFound() throws Exception {
+  public void testFindAllLoansForClientIdClientNotFound() throws Exception {
     when(instance.clientRepository.findById(TEST_CLIENT_ID)).thenReturn(null);
 
     mockMvc.perform(get("/loans/client/{id}", TEST_CLIENT_ID))
