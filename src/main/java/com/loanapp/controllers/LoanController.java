@@ -107,9 +107,9 @@ public class LoanController {
         return new ResponseEntity<>(loans, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/loans/user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> findAllLoansForUser(@PathVariable("id") String id) {
-        log.info("Finding All Approved Loan  For User " + id);
+    @RequestMapping(value = "/loans/client/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> findAllLoansForClient(@PathVariable("id") String id) {
+        log.info("Finding All Approved Loan  For Client " + id);
         Client client = clientRepository.findById(id);
 
         if (client == null){

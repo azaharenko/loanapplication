@@ -58,7 +58,7 @@ Example of success response body: {"id":1,"amount":22.33,"client":{"id":"138","f
 
 
 **List all approved loans by client:**
-URL: GET http://localhost:8080/loans/user/{clientId}
+URL: GET http://localhost:8080/loans/client/{clientId}
 params:  
 clientId : String (Mandatory)
 
