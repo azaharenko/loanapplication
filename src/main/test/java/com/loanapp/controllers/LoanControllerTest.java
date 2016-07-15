@@ -69,7 +69,7 @@ public class LoanControllerTest {
     mockLoanApplication.setClientId(TEST_CLIENT_ID);
     mockLoanApplication.setFirstName(anyString());
     mockLoanApplication.setLastName(anyString());
-//    mockLoanApplication.setAmount(anyInt());
+    mockLoanApplication.setAmount(new BigDecimal(1.111));
     when(instance.requestService.getCountry(anyString())).thenReturn(TEST_COUNTRY);
     when(instance.requestService.isSpamCompliant(TEST_COUNTRY)).thenReturn(true);
     when(instance.clientRepository.findById(TEST_CLIENT_ID)).thenReturn(null);
@@ -89,7 +89,7 @@ public class LoanControllerTest {
     mockLoanApplication.setClientId(client.getId());
     mockLoanApplication.setFirstName(anyString());
     mockLoanApplication.setLastName(anyString());
-//    mockLoanApplication.setAmount(22.33);
+    mockLoanApplication.setAmount(new BigDecimal(1.111));
     when(instance.requestService.getCountry(anyString())).thenReturn(TEST_COUNTRY);
     when(instance.requestService.isSpamCompliant(TEST_COUNTRY)).thenReturn(true);
     when(instance.clientRepository.findById(client.getId())).thenReturn(client);
@@ -108,7 +108,7 @@ public class LoanControllerTest {
     mockLoanApplication.setClientId(client.getId());
     mockLoanApplication.setFirstName(anyString());
     mockLoanApplication.setLastName(anyString());
-//    mockLoanApplication.setAmount(anyLong());
+    mockLoanApplication.setAmount(new BigDecimal(1.111));
     when(instance.requestService.getCountry(anyString())).thenReturn(TEST_COUNTRY);
     when(instance.requestService.isSpamCompliant(TEST_COUNTRY)).thenReturn(true);
     when(instance.clientRepository.findById(client.getId())).thenReturn(client);
@@ -126,7 +126,7 @@ public class LoanControllerTest {
     mockLoanApplication.setClientId(anyString());
     mockLoanApplication.setFirstName(anyString());
     mockLoanApplication.setLastName(anyString());
-//    mockLoanApplication.setAmount(anyLong());
+    mockLoanApplication.setAmount(new BigDecimal(1.111));
     when(instance.requestService.getCountry(anyString())).thenReturn(TEST_COUNTRY);
     when(instance.requestService.isSpamCompliant(TEST_COUNTRY)).thenReturn(false);
 
