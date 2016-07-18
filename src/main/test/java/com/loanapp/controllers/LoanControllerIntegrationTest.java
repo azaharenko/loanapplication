@@ -9,14 +9,12 @@ import com.loanapp.repositories.ClientRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.math.BigDecimal;
 import java.util.concurrent.TimeUnit;
@@ -44,9 +42,6 @@ public class LoanControllerIntegrationTest {
   
   final ObjectMapper mapper = new ObjectMapper();
 
-  @Autowired
-  private WebApplicationContext webApplicationContext;
-
   private MockMvc mockMvc;
   protected LoanApplication mockLoanApplication;
 
@@ -55,7 +50,7 @@ public class LoanControllerIntegrationTest {
     instance = new LoanController();
     instance.clientRepository = mock(ClientRepository.class);
     mockLoanApplication = mock(LoanApplication.class);
-    mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+    this.mockMvc = MockMvcBuilders.standaloneSetup(instance).build();
 
   }
 
