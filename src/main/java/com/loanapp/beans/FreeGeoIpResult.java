@@ -14,7 +14,7 @@ public class FreeGeoIpResult {
   private String time_zone;
   private Double latitude;
   private Double longitude;
-  private String metro_code;
+  private int metro_code;
 
 
     public String getIp() {
@@ -97,11 +97,11 @@ public class FreeGeoIpResult {
         this.longitude = longitude;
     }
 
-    public String getMetro_code() {
+    public int getMetro_code() {
         return metro_code;
     }
 
-    public void setMetro_code(String metro_code) {
+    public void setMetro_code(int metro_code) {
         this.metro_code = metro_code;
     }
 
@@ -110,7 +110,7 @@ public class FreeGeoIpResult {
     public FreeGeoIpResult() {
     }
 
-    public FreeGeoIpResult(String ip, String country_code, String country_name, String region_code, String region_name, String city, String zip_code, String time_zone, Double latitude, Double longitude, String metro_code) {
+    public FreeGeoIpResult(String ip, String country_code, String country_name, String region_code, String region_name, String city, String zip_code, String time_zone, Double latitude, Double longitude, int metro_code) {
         this.ip = ip;
         this.country_code = country_code;
         this.country_name = country_name;

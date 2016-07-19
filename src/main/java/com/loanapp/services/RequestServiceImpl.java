@@ -64,7 +64,7 @@ public class RequestServiceImpl implements RequestService {
                 buff.poll();
             }
             countryRequestMap.put(country, buff);
-            if (buff.size() < numberOfSessionsPerSecond+ 1) {
+            if (buff.size() < numberOfSessionsPerSecond + 1) {
                 return true;
             } else {
                 Long firstItem = buff.peek();
