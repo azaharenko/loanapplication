@@ -17,7 +17,7 @@ public class CountryResolverServiceImpl implements CountryResolverService{
 
         Client client = Client.create();
         try {
-            WebResource webResource = client.resource(new URI(Constants.COUNTRY_BASE_URL.concat(ip)));
+            WebResource webResource = client.resource(new URI(Constants.COUNTRY_BY_IP_RESOLVING_URL.concat(ip)));
             return webResource.accept("application/json").get(ClientResponse.class);
         } catch (Exception e) {
             log.error("Country resolved service failed with message: " + e.getMessage());

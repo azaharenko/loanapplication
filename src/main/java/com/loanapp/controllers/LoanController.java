@@ -12,15 +12,18 @@ import com.loanapp.utils.MessageType;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -28,7 +31,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RestController
-@PropertySource(value={"file:${user.home}/.loanapplication/config.properties"}, ignoreResourceNotFound = true)
 public class LoanController {
     protected final static Logger log = LogManager.getLogger(LoanController.class);
 
@@ -39,14 +41,11 @@ public class LoanController {
     @Autowired
     ClientRepository clientRepository;
 
-    @Value("${com.loanapp.default.country:LV}")
-    String defaultCountry;
-
     @RequestMapping(value = "/loan", method = RequestMethod.POST)
     public ResponseEntity<?> createLoan(@Valid @RequestBody LoanApplication loanApplication, UriComponentsBuilder ucBuilder, HttpServletRequest request) {
       log.info("Legacy REST endpoint called: POST /loan/ from IP = " + request.getRemoteAddr());
 
-      String country = ((request.getRemoteAddr() != null) ? requestService.getCountry(request.getRemoteAddr()) : defaultCountry);
+      String country = ((request.getRemoteAddr() != null) ? requestService.getCountry(request.getRemoteAddr()) : Constants.DEFAULT_COUNTRY);
       if (requestService.isSpamCompliant(country)) {
 
         String clientId = loanApplication.getClientId();

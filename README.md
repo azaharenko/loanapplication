@@ -1,8 +1,6 @@
 <b>Build application:</b>
 gradle build
 
-<b>Create config file :</b>
-Create your own config.properties file or copy from project /doc folder to "file:${user.home}/.loanapplication/config.properties"
 
 <b>Start server:</b>
 java -jar build/libs/loanapplication-1.0.0.jar
@@ -34,7 +32,7 @@ amount : Numeric in format xxxx.xx (min=1, max=1000) (Mandatory)
 
 According the task description there are following requirements validation rules are applied:
   - Application comes from blacklisted personal id and client already exist in the database
-  - N application (number is configurable via com.loanapp.number.session.second, value initialy set to 2) / second are received from a single country (com.loanapp.default.country=LV)
+  - N application (number is configurable via com.loanapp.number.session.second, value initialy set to 2) / second are received from a single country (default country=LV)
   - If requested clientId already exist in the database provided firstName and lastName must match ones in the database
 
 

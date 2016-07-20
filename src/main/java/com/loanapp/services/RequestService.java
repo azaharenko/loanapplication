@@ -6,4 +6,5 @@ import org.springframework.stereotype.Component;
 public interface RequestService {
     String getCountry(String ip);
     boolean isSpamCompliant(String country);
+  void resetState();
 }

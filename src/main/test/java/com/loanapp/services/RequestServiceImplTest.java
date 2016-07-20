@@ -1,10 +1,12 @@
 package com.loanapp.services;
 
 import com.loanapp.Application;
+import com.loanapp.utils.Constants;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -21,25 +23,18 @@ import static org.mockito.Mockito.mock;
 @WebAppConfiguration
 @SpringApplicationConfiguration(classes = Application.class)
 public class RequestServiceImplTest {
-  @Value("${com.loanapp.number.session.second}")
-  int numberOfSessionsPerSecond;
 
-  RequestServiceImpl instance;
-
-  @InjectMocks
+  @Autowired
   RequestService requestService;
 
   @Before
   public void setUp() {
-    instance = new RequestServiceImpl();
-    requestService = mock(RequestService.class);
-
+     requestService.resetState();
   }
 
   @Test
   public void testSpamCompliance(){
-    requestService = new RequestServiceImpl();
-    IntStream.range(0, numberOfSessionsPerSecond).parallel().forEach(
+    IntStream.range(0, Constants.NUMBER_OF_SESSIONS_PER_SECOND).parallel().forEach(
         nbr -> {
           assertTrue(requestService.isSpamCompliant("LV"));
         }
@@ -54,8 +49,7 @@ public class RequestServiceImplTest {
 
   @Test
   public void testSpamComplianceFail(){
-    requestService = new RequestServiceImpl();
-    IntStream.range(0, numberOfSessionsPerSecond).parallel().forEach(
+    IntStream.range(0, Constants.NUMBER_OF_SESSIONS_PER_SECOND).parallel().forEach(
         nbr -> {
           assertTrue(requestService.isSpamCompliant("LV"));
         }
@@ -64,9 +58,8 @@ public class RequestServiceImplTest {
   }
 
   @Test
-  public void testSpamComplianceDifferentCountries(){
-    requestService = new RequestServiceImpl();
-    IntStream.range(0, numberOfSessionsPerSecond).parallel().forEach(
+  public void testSpamComplianceDifferentCountriesOneThread(){
+    IntStream.range(0, Constants.NUMBER_OF_SESSIONS_PER_SECOND).parallel().forEach(
         nbr -> {
           assertTrue(requestService.isSpamCompliant("LV"));
           assertTrue(requestService.isSpamCompliant("EE"));
@@ -79,27 +72,23 @@ public class RequestServiceImplTest {
       e.printStackTrace();
     }
 
-    assertFalse(requestService.isSpamCompliant("EE"));
-    assertFalse(requestService.isSpamCompliant("LV"));
+    assertTrue(requestService.isSpamCompliant("LV"));
+    assertTrue(requestService.isSpamCompliant("EE"));
 
   }
 
   @Test
   public void testSpamComplianceDifferentCountriesSeparateThreads(){
-    requestService = new RequestServiceImpl();
-    new Thread(() -> {
-      assertTrue(requestService.isSpamCompliant("LV"));
-    }).start();
-    new Thread(() -> {
-      assertTrue(requestService.isSpamCompliant("EE"));
-    }).start();
-    new Thread(() -> {
-      assertTrue(requestService.isSpamCompliant("EE"));
-    }).start();
-    new Thread(() -> {
-      assertTrue(requestService.isSpamCompliant("LV"));
-    }).start();
-
+    IntStream.range(0, Constants.NUMBER_OF_SESSIONS_PER_SECOND).parallel().forEach(
+        nbr -> {
+          assertTrue(requestService.isSpamCompliant("LV"));
+        }
+    );
+    IntStream.range(0, Constants.NUMBER_OF_SESSIONS_PER_SECOND).parallel().forEach(
+        nbr -> {
+          assertTrue(requestService.isSpamCompliant("EE"));
+        }
+    );
     assertFalse(requestService.isSpamCompliant("LV"));
     try {
       TimeUnit.MILLISECONDS.sleep(1001);
