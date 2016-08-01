@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 
-@Service("requestService")
+@Service
 public class RequestServiceImpl implements RequestService {
     protected final static Logger log = LogManager.getLogger(RequestServiceImpl.class);
 
