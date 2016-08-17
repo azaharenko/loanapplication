@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.net.URI;
 
-@Service("countryResolverService")
+@Service
 public class CountryResolverServiceImpl implements CountryResolverService{
     protected final static Logger log = LogManager.getLogger(CountryResolverServiceImpl.class);
     public ClientResponse getCountry(String ip) {
