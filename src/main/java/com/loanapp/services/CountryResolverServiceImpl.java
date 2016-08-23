@@ -14,7 +14,6 @@ import java.net.URI;
 public class CountryResolverServiceImpl implements CountryResolverService{
     protected final static Logger log = LogManager.getLogger(CountryResolverServiceImpl.class);
     public ClientResponse getCountry(String ip) {
-
         Client client = Client.create();
         try {
             WebResource webResource = client.resource(new URI(Constants.COUNTRY_BY_IP_RESOLVING_URL.concat(ip)));
